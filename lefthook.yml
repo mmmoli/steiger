@@ -5,3 +5,8 @@ pre-commit:
       run: |
         echo "{staged_files}" | grep -vE "templates/|scripts/" | xargs pnpm biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off
       stage_fixed: true
+
+pre-push:
+  commands:
+    build:
+      run: pnpm run build
