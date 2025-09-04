@@ -1,9 +1,10 @@
 import * as Command from "@effect/cli/Command";
-import { aggregateCommand } from "./commands/Aggregate.js";
+import * as Aggregate from "./commands/Aggregate.js";
+import * as Package from "./commands/Package.js";
 
 const command = Command.make("generate").pipe(
   Command.withDescription("Generates code"),
-  Command.withSubcommands([aggregateCommand]),
+  Command.withSubcommands([Aggregate.command, Package.command]),
 );
 
 export const run = Command.run(command, {

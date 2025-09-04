@@ -12,7 +12,7 @@ export class PlopRunError extends Data.TaggedError("PlopRunError")<{
 }> {}
 
 export const command = Command.make(
-  "aggregate",
+  "package",
   {
     moduleName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
@@ -41,20 +41,20 @@ export const command = Command.make(
         templatesDir,
       });
 
-      const destination = process.cwd();
+      const here = process.cwd();
 
-      const base = path.join(templatesDir, "aggregate");
-      const templateFiles = path.join(templatesDir, "aggregate", "**/*");
+      const base = path.join(templatesDir, "package");
+      const templateFiles = path.join(templatesDir, "package", "**/*");
 
       yield* Effect.logDebug({
-        destination,
+        here,
         templatesDir,
         base,
         templateFiles,
       });
 
       const makePlopApi = yield* Plop.SetPlopGenerator;
-      const apiName = "aggregate";
+      const apiName = "package";
 
       const api = yield* makePlopApi.set(apiName, {
         description: "Generate a new DDD module + Effect",
@@ -78,7 +78,7 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination,
+            destination: process.cwd(),
             base: base,
             templateFiles: templateFiles,
           },
