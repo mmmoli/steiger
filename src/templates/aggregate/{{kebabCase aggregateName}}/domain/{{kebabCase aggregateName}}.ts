@@ -8,7 +8,7 @@ export const {{pascalCase aggregateName}}Id = Schema.NonEmptyTrimmedString.pipe(
 );
 
 export class {{pascalCase aggregateName}} extends Schema.Class<{{pascalCase aggregateName}}>(
-  "{{kebabCase moduleName}}/{{kebabCase aggregateName}}/domain/{{pascalCase aggregateName}}",
+  "{{kebabCase packageName}}/{{kebabCase aggregateName}}/domain/{{pascalCase aggregateName}}",
 )(
   {
   id: {{pascalCase aggregateName}}Id,

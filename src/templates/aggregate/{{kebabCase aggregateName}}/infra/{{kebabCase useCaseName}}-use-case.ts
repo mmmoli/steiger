@@ -6,7 +6,7 @@ import * as Domain from "../../domain";
 import * as App from "../application";
 
 export class {{ pascalCase useCaseName }}UseCase extends Effect.Service<{{ pascalCase useCaseName }}UseCase>()(
-  "{{ kebabCase moduleName }}/{{ kebabCase aggregateName }}/infra/{{ pascalCase useCaseName }}UseCaseInput",
+  "{{ kebabCase packageName }}/{{ kebabCase aggregateName }}/infra/{{ pascalCase useCaseName }}UseCaseInput",
   {
     dependencies: [Infra.IDGeneratorLive],
     effect: Effect.gen(function* () {

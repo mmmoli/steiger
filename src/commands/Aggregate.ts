@@ -14,7 +14,7 @@ export class PlopRunError extends Data.TaggedError("PlopRunError")<{
 export const command = Command.make(
   "aggregate",
   {
-    moduleName: Options.text("module").pipe(
+    packageName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
       Options.withDefault("module-auth"),
     ),
@@ -27,7 +27,7 @@ export const command = Command.make(
       Options.withDefault("Register User"),
     ),
   },
-  ({ moduleName, aggregateName, useCaseName }) =>
+  ({ packageName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
       const path = yield* Path.Path;
 
@@ -61,7 +61,7 @@ export const command = Command.make(
         prompts: [
           {
             type: "input",
-            name: "moduleName",
+            name: "packageName",
             message: "Module name (e.g. Auth)",
           },
           {
@@ -92,7 +92,7 @@ export const command = Command.make(
       const result = yield* Effect.tryPromise({
         try: () =>
           api.runActions({
-            moduleName,
+            packageName,
             aggregateName,
             useCaseName,
           }),

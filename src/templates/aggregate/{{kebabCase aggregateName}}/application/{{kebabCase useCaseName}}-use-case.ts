@@ -5,13 +5,13 @@ import * as Dogs from "../../dogs/domain";
 import * as Domain from "../domain";
 
 export class {{ pascalCase useCaseName }}UseCaseInput extends Schema.Class<{{ pascalCase useCaseName }}UseCaseInput>(
-  "{{ kebabCase moduleName }}/{{ kebabCase aggregateName }}/application/{{ pascalCase useCaseName }}UseCaseInput",
+  "{{ kebabCase packageName }}/{{ kebabCase aggregateName }}/application/{{ pascalCase useCaseName }}UseCaseInput",
 )(
   {
     pipeline: Schema.Struct({
       id: Domain.{{ pascalCase aggregateName }}Id.pipe(
         Schema.annotations({
-          description: `The ID of the {{ kebabCase moduleName }} you'd like to run e.g. "Picture 1"`,
+          description: `The ID of the {{ kebabCase packageName }} you'd like to run e.g. "Picture 1"`,
         }),
       ),
     }),
