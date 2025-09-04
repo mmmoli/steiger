@@ -5,6 +5,9 @@
   "packageManager": "pnpm@10.14.0",
   "license": "MIT",
   "description": "Module scaffolding tool for strict DDD + Effect.ts",
+  "bin": {
+    "steiger": "./dist/bin.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mmmoli/steiger"

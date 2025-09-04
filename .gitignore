@@ -33,3 +33,4 @@ coverage/
 *.sw?
 *.sublime-project
 *.sublime-workspace
+core-auth/
