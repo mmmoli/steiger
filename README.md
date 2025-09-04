@@ -1,6 +1,6 @@
 # Effect CLI Application Template
 
-This template provides a solid foundation for building scalable and maintainable command-line applications with Effect. 
+This template provides a solid foundation for building scalable and maintainable command-line applications with Effect.
 
 ## Running Code
 
@@ -9,7 +9,7 @@ This template leverages [tsx](https://tsx.is) to allow execution of TypeScript f
 To execute a file with `tsx`:
 
 ```sh
-pnpm tsx ./path/to/the/file.ts
+pnpm tsx src/bin.ts
 ```
 
 ## Operations
@@ -29,4 +29,3 @@ To test the package:
 ```sh
 pnpm test
 ```
-

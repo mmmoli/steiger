@@ -1,4 +1,4 @@
-import type * as API from "plop";
+import type * as API from "node-plop";
 
 export default function (plop: API.NodePlopAPI) {
   plop.setGenerator("module", {
