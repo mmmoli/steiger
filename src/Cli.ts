@@ -2,40 +2,27 @@ import * as Options from "@effect/cli/Options";
 import * as Command from "@effect/cli/Command";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
-import nodePlop from "node-plop";
-import { fileURLToPath } from "url";
-import path from "path";
+import { LocalPlopFile } from "./Plop.js";
 
 const command = Command.make(
   "generate",
   {
     moduleName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
-      Options.withDefault("core-auth"),
     ),
     aggregateName: Options.text("aggregate").pipe(
       Options.withDescription("The name of the aggregate to generate"),
       Options.withDefault("User"),
     ),
-    useCaseName: Options.text("use case").pipe(
+    useCaseName: Options.text("useCase").pipe(
       Options.withDescription("The name of a use case to generate"),
       Options.withDefault("Create User"),
     ),
   },
   ({ moduleName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
-      const __filename = fileURLToPath(import.meta.url);
-      const __dirname = path.dirname(__filename);
-      const plopfilePath = path.join(__dirname, "plopfile.js");
-
-      const plop = yield* Effect.tryPromise({
-        try: () => nodePlop(plopfilePath),
-        catch: (error) => {
-          return new Error(
-            `Failed to load plopfile at ${plopfilePath}: ${error}`,
-          );
-        },
-      });
+      const Plop = yield* LocalPlopFile;
+      const plop = yield* Plop.make("./plopfile.js");
 
       const moduleAdd = plop.getGenerator("module");
 

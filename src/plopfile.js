@@ -28,9 +28,9 @@ export default function (/** @type {import('node-plop').NodePlopAPI} */ plop) {
     actions: [
       {
         type: "addMany",
-        destination: path.join(process.cwd(), "{{dashCase moduleName}}"),
-        base: path.join(templatesDir, "module"),
-        templateFiles: path.join(templatesDir, "module", "**/*"),
+        destination: process.cwd(),
+        base: path.join(templatesDir, "aggregate"),
+        templateFiles: path.join(templatesDir, "aggregate", "**/*"),
       },
     ],
   });

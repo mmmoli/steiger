@@ -34,3 +34,4 @@ coverage/
 *.sublime-project
 *.sublime-workspace
 core-auth/
+user/
