@@ -1,0 +1,25 @@
+{
+  "name": "steiger",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Module scaffolding tool for strict DDD + Effect.ts",
+  "main": "index.js",
+  "bin": {
+    "steiger": "./cli.js"
+  },
+  "scripts": {
+    "plop": "cross-env NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.0",
+  "devDependencies": {
+    "cross-env": "^10.0.0",
+    "plop": "^4.0.2",
+    "tsx": "^4.20.5"
+  },
+  "dependencies": {
+    "effect": "^3.17.13"
+  }
+}
