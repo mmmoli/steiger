@@ -26,6 +26,7 @@
     "copy-package-json": "tsx scripts/copy-package-json.ts"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.1.4",
     "@effect/cli": "^0.69.0",
     "@effect/platform": "^0.90.3",
     "@effect/platform-node": "^0.96.0",
@@ -38,9 +39,15 @@
     "vitest": "^3.2.0"
   },
   "pnpm": {
-    "patchedDependencies": {}
+    "patchedDependencies": {},
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "msgpackr-extract"
+    ]
   },
   "dependencies": {
+    "lefthook": "^1.12.2",
     "node-plop": "^0.32.1"
   }
 }

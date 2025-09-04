@@ -1,8 +1,7 @@
-import * as Options from "@effect/cli/Options";
 import * as Command from "@effect/cli/Command";
+import * as Options from "@effect/cli/Options";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
-import { LocalPlopFile } from "./Plop.js";
 
 const command = Command.make(
   "generate",
@@ -21,8 +20,8 @@ const command = Command.make(
   },
   ({ moduleName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
-      const Plop = yield* LocalPlopFile;
-      const plop = yield* Plop.make("./plopfile.js");
+      const { make } = yield* Plop;
+      const plop = yield* make();
 
       const aggregateAdd = plop.getGenerator("aggregate");
 

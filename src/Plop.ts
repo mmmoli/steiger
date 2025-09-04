@@ -1,66 +1,55 @@
-import * as Effect from "effect/Effect";
-import * as Data from "effect/Data";
-import * as Path from "@effect/platform/Path";
-import * as Url from "@effect/platform/Url";
 import * as FileSystem from "@effect/platform/FileSystem";
+import * as Path from "@effect/platform/Path";
+import * as Data from "effect/Data";
+import * as Effect from "effect/Effect";
 import nodePlop from "node-plop";
-
-export class LocalPlopfileFoundError extends Data.TaggedError(
-  "LocalPlopfileFoundError",
-)<{
-  cause: unknown;
-}> {}
 
 export class PlopApiError extends Data.TaggedError("PlopApiError")<{
   cause: unknown;
 }> {}
 
-export class LocalPlopFile extends Effect.Service<LocalPlopFile>()(
-  "LocalPlopFile",
-  {
-    effect: Effect.gen(function* () {
-      const path = yield* Path.Path;
-      const fs = yield* FileSystem.FileSystem;
+export class Plop extends Effect.Service<Plop>()("Plop", {
+  effect: Effect.gen(function* () {
+    const path = yield* Path.Path;
+    const fs = yield* FileSystem.FileSystem;
 
-      const make = Effect.fn("LocalPlopFile.api")(function* (
-        pathToPlopfile = "./plopfile.js",
-      ) {
-        const plopfilePath = yield* Url.fromString(import.meta.url).pipe(
-          Effect.map((url) => url.pathname),
-          Effect.map((file) => path.dirname(file)),
-          Effect.map((dir) => path.join(dir, pathToPlopfile)),
-        );
-
-        const exists = yield* fs
-          .exists(plopfilePath)
-          .pipe(
-            Effect.mapError(
-              (error) => new LocalPlopfileFoundError({ cause: error }),
-            ),
-          );
-
-        yield* Effect.logInfo("Found Plopfile");
-
-        if (!exists)
-          return yield* Effect.fail(
-            new LocalPlopfileFoundError({
-              cause: `Plopfile not found at "${plopfilePath}"`,
-            }),
-          );
-
-        const plop = yield* Effect.tryPromise({
-          try: () => nodePlop(plopfilePath),
-          catch: (error) => {
-            return new PlopApiError({
-              cause: error,
-            });
-          },
-        });
-
-        return plop;
+    const make = Effect.fn("Plop.make")(function* () {
+      const plop = yield* Effect.tryPromise({
+        try: () => nodePlop(),
+        catch: (error) => {
+          return new PlopApiError({
+            cause: error,
+          });
+        },
       });
 
-      return { make } as const;
-    }),
-  },
-) {}
+      // plop.setGenerator("aggregate", {
+      //   description: "Generate a new DDD module + Effect",
+      //   prompts: [
+      //     {
+      //       type: "input",
+      //       name: "aggregateName",
+      //       message: "Aggregate name:",
+      //     },
+      //     {
+      //       type: "input",
+      //       name: "useCaseName",
+      //       message: "Use case name:",
+      //     },
+      //   ],
+      //   actions: [
+      //     {
+      //       type: "addMany",
+      //       destination: process.cwd(),
+      //       base: path.join(templatesDir, "package"),
+      //       templateFiles: path.join(templatesDir, "package", "**/*"),
+      //     },
+      //   ],
+      // });
+
+      return plop;
+    });
+
+    return { make } as const;
+  }),
+}) {}
