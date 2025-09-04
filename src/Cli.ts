@@ -36,8 +36,20 @@ const command = Command.make(
             aggregateName,
             useCaseName,
           }),
-        catch: (error) => Effect.logError(error),
+        catch: (cause) => {
+          Effect.logError(cause);
+          return new Error("Generation failed");
+        },
       });
+
+      yield* Effect.log("Output", {
+        result,
+      });
+
+      const failures = Option.fromIterable(result.failures);
+      if (Option.isSome(failures)) {
+        yield* Effect.die("Generation failed");
+      }
 
       yield* Effect.log("Generation complete", { result: result.failures });
     }),
