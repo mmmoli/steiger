@@ -1,5 +1,5 @@
 import * as Layer from "effect/Layer";
-import * as UCs from "./index";
+import * as UCs from "./index.js";
 
 export const InfraLayerLive = Layer.empty;
 

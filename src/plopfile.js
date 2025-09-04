@@ -6,7 +6,7 @@ export default function (/** @type {import('node-plop').NodePlopAPI} */ plop) {
   const __dirname = path.dirname(__filename);
   const templatesDir = path.join(__dirname, "templates");
 
-  plop.setGenerator("module", {
+  plop.setGenerator("aggregate", {
     description: "Generate a new DDD module + Effect",
     prompts: [
       {
@@ -29,8 +29,8 @@ export default function (/** @type {import('node-plop').NodePlopAPI} */ plop) {
       {
         type: "addMany",
         destination: process.cwd(),
-        base: path.join(templatesDir, "aggregate"),
-        templateFiles: path.join(templatesDir, "aggregate", "**/*"),
+        base: path.join(templatesDir, "package"),
+        templateFiles: path.join(templatesDir, "package", "**/*"),
       },
     ],
   });

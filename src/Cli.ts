@@ -24,11 +24,11 @@ const command = Command.make(
       const Plop = yield* LocalPlopFile;
       const plop = yield* Plop.make("./plopfile.js");
 
-      const moduleAdd = plop.getGenerator("module");
+      const aggregateAdd = plop.getGenerator("aggregate");
 
       const result = yield* Effect.tryPromise({
         try: () =>
-          moduleAdd.runActions({
+          aggregateAdd.runActions({
             moduleName,
             aggregateName,
             useCaseName,
