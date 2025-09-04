@@ -17,7 +17,7 @@
     "directory": "dist"
   },
   "scripts": {
-    "build": "tsup && pnpm copy-package-json",
+    "build": "tsup && pnpm copy-package-json && cp -r src/templates dist/",
     "build:ts": "tsup",
     "clean": "rimraf dist/*",
     "check": "tsc -b tsconfig.json",

@@ -29,11 +29,11 @@ export class {{ pascalCase useCaseName }}UseCaseInput extends Schema.Class<{{ pa
     );
 }
 
-export interface {{ pascalCase aggregateName }}UseCaseImpl {
+export interface {{ pascalCase useCaseName }}UseCaseImpl {
   execute: (
     params: typeof {{ pascalCase useCaseName }}UseCaseInput.Encoded,
   ) => Effect.Effect<
-    Domain.Run,
+    Domain.{{ pascalCase aggregateName }},
     | Common.InvalidInputError
     | Domain.{{ pascalCase aggregateName }}GetFailed
   >;

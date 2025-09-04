@@ -13,10 +13,10 @@ export class {{ pascalCase useCaseName }}UseCase extends Effect.Service<{{ pasca
       const repo = yield* Domain.{{ pascalCase aggregateName }}Repo;
       const generateId = yield* Common.IDGenerator;
 
-      const execute: App.{{ pascalCase useCaseName }}UseCaseUseCaseImpl["execute"] = Effect.fn(
-        "{{ pascalCase useCaseName }}UseCaseUseCase.execute",
+      const execute: App.{{ pascalCase useCaseName }}UseCaseImpl["execute"] = Effect.fn(
+        "{{ pascalCase useCaseName }}UseCase.execute",
       )(function* (dto) {
-        const input = yield* App.{{ pascalCase useCaseName }}UseCaseUseCaseInput.decode(dto);
+        const input = yield* App.{{ pascalCase useCaseName }}UseCaseInput.decode(dto);
 
         const now = new Date(yield* Clock.currentTimeMillis);
 

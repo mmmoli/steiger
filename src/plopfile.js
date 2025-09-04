@@ -1,6 +1,11 @@
-import type * as API from "node-plop";
+import { fileURLToPath } from "url";
+import path from "path";
 
-export default function (plop: API.NodePlopAPI) {
+export default function (/** @type {import('node-plop').NodePlopAPI} */ plop) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const templatesDir = path.join(__dirname, "templates");
+
   plop.setGenerator("module", {
     description: "Generate a new DDD module + Effect",
     prompts: [
@@ -23,9 +28,9 @@ export default function (plop: API.NodePlopAPI) {
     actions: [
       {
         type: "addMany",
-        destination: "{{dashCase moduleName}}",
-        base: "templates/module",
-        templateFiles: "templates/module/**/*",
+        destination: path.join(process.cwd(), "{{dashCase moduleName}}"),
+        base: path.join(templatesDir, "module"),
+        templateFiles: path.join(templatesDir, "module", "**/*"),
       },
     ],
   });

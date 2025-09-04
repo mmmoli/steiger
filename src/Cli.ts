@@ -3,6 +3,8 @@ import * as Command from "@effect/cli/Command";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
 import nodePlop from "node-plop";
+import { fileURLToPath } from "url";
+import path from "path";
 
 const command = Command.make(
   "generate",
@@ -22,16 +24,24 @@ const command = Command.make(
   },
   ({ moduleName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
+      const __filename = fileURLToPath(import.meta.url);
+      const __dirname = path.dirname(__filename);
+      const plopfilePath = path.join(__dirname, "plopfile.js");
+
       const plop = yield* Effect.tryPromise({
-        try: () => nodePlop(`./src/plopfile.ts`),
-        catch: (error) => Effect.logError(error),
+        try: () => nodePlop(plopfilePath),
+        catch: (error) => {
+          return new Error(
+            `Failed to load plopfile at ${plopfilePath}: ${error}`,
+          );
+        },
       });
 
-      const basicAdd = plop.getGenerator("module");
+      const moduleAdd = plop.getGenerator("module");
 
       const result = yield* Effect.tryPromise({
         try: () =>
-          basicAdd.runActions({
+          moduleAdd.runActions({
             moduleName,
             aggregateName,
             useCaseName,
@@ -42,20 +52,18 @@ const command = Command.make(
         },
       });
 
-      yield* Effect.log("Output", {
-        result,
-      });
-
       const failures = Option.fromIterable(result.failures);
       if (Option.isSome(failures)) {
         yield* Effect.die("Generation failed");
       }
 
-      yield* Effect.log("Generation complete", { result: result.failures });
+      for (const change of result.changes) {
+        yield* Effect.log(change.path);
+      }
     }),
 );
 
 export const run = Command.run(command, {
   name: "Steiger",
-  version: "0.0.0",
+  version: "0.1.0",
 });
