@@ -5,6 +5,7 @@ import * as Url from "@effect/platform/Url";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
+import * as Generate from "./Generate.js";
 import * as Plop from "./Plop.js";
 
 export class PlopRunError extends Data.TaggedError("PlopRunError")<{
@@ -30,14 +31,14 @@ export const command = Command.make(
   ({ packageName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
       const path = yield* Path.Path;
+      const { destination } = yield* Generate.command;
+      const where = path.join(process.cwd(), destination);
 
       const templatesDir = yield* Url.fromString(import.meta.url).pipe(
         Effect.map((url) => url.pathname),
         Effect.map((f) => path.dirname(f)),
         Effect.map((d) => path.join(d, "../dist/templates")),
       );
-
-      const destination = process.cwd();
 
       const makePlopApi = yield* Plop.SetPlopGenerator;
       const apiName = "package";
@@ -64,16 +65,13 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination,
+            destination: where,
             base: path.join(templatesDir, "package"),
             templateFiles: path.join(templatesDir, "package/**/*"),
           },
           {
             type: "addMany",
-            destination: path.join(
-              destination,
-              "{{ kebabCase packageName }}/src",
-            ),
+            destination: path.join(where, "{{ kebabCase packageName }}/src"),
             base: path.join(templatesDir, "aggregate"),
             templateFiles: path.join(templatesDir, "aggregate/**/*"),
           },

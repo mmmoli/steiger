@@ -5,6 +5,7 @@ import * as Url from "@effect/platform/Url";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
+import * as Generate from "./Generate.js";
 import * as Plop from "./Plop.js";
 
 export class PlopRunError extends Data.TaggedError("PlopRunError")<{
@@ -30,6 +31,8 @@ export const command = Command.make(
   ({ packageName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
       const path = yield* Path.Path;
+      const { destination } = yield* Generate.command;
+      const where = path.join(process.cwd(), destination);
 
       const templatesDir = yield* Url.fromString(import.meta.url).pipe(
         Effect.map((url) => url.pathname),
@@ -41,14 +44,12 @@ export const command = Command.make(
         templatesDir,
       });
 
-      const destination = process.cwd();
-
       const base = path.join(templatesDir, "aggregate");
       const templateFiles = path.join(base, "**/*");
 
       yield* Effect.logDebug({
         meta: import.meta,
-        destination,
+        destination: where,
         templatesDir,
         base,
         templateFiles,
