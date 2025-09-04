@@ -5,14 +5,14 @@ import * as Url from "@effect/platform/Url";
 import * as Data from "effect/Data";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
-import * as Plop from "../Plop.js";
+import * as Plop from "./Plop.js";
 
 export class PlopRunError extends Data.TaggedError("PlopRunError")<{
   cause: unknown;
 }> {}
 
 export const command = Command.make(
-  "aggregate",
+  "package",
   {
     packageName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
@@ -34,27 +34,27 @@ export const command = Command.make(
       const templatesDir = yield* Url.fromString(import.meta.url).pipe(
         Effect.map((url) => url.pathname),
         Effect.map((f) => path.dirname(f)),
-        Effect.map((d) => path.join(d, "../templates")),
+        Effect.map((d) => path.join(d, "../dist/templates")),
       );
 
       yield* Effect.logDebug({
         templatesDir,
       });
 
-      const destination = process.cwd();
+      const here = process.cwd();
 
-      const base = path.join(templatesDir, "aggregate");
-      const templateFiles = path.join(templatesDir, "aggregate", "**/*");
+      const base = path.join(templatesDir, "package");
+      const templateFiles = path.join(base, "**/*");
 
       yield* Effect.logDebug({
-        destination,
+        here,
         templatesDir,
         base,
         templateFiles,
       });
 
       const makePlopApi = yield* Plop.SetPlopGenerator;
-      const apiName = "aggregate";
+      const apiName = "package";
 
       const api = yield* makePlopApi.set(apiName, {
         description: "Generate a new DDD module + Effect",
@@ -78,7 +78,7 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination,
+            destination: process.cwd(),
             base: base,
             templateFiles: templateFiles,
           },

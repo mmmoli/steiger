@@ -14,6 +14,6 @@ const appLive = Layer.mergeAll(Plop.SetPlopGenerator.Default);
 run(process.argv).pipe(
   Effect.provide(appLive),
   Effect.provide(NodeContext.layer),
-  Logger.withMinimumLogLevel(LogLevel.Debug),
+  Logger.withMinimumLogLevel(LogLevel.Info),
   NodeRuntime.runMain({ disableErrorReporting: true }),
 );
