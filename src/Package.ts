@@ -37,17 +37,14 @@ export const command = Command.make(
         Effect.map((d) => path.join(d, "../dist/templates")),
       );
 
-      yield* Effect.logDebug({
-        templatesDir,
-      });
-
-      const here = process.cwd();
+      const destination = process.cwd();
 
       const base = path.join(templatesDir, "package");
       const templateFiles = path.join(base, "**/*");
 
       yield* Effect.logDebug({
-        here,
+        meta: import.meta,
+        destination,
         templatesDir,
         base,
         templateFiles,
@@ -78,15 +75,11 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination: process.cwd(),
-            base: base,
-            templateFiles: templateFiles,
+            destination,
+            base,
+            templateFiles,
           },
         ],
-      });
-
-      yield* Effect.logDebug({
-        api,
       });
 
       const result = yield* Effect.tryPromise({
@@ -102,15 +95,10 @@ export const command = Command.make(
         },
       });
 
-      yield* Effect.logDebug({
-        result,
-      });
-
       const failure = Option.fromNullable(result.failures?.[0]);
 
       if (Option.isSome(failure)) {
-        console.error(failure);
-        return Effect.die("nope");
+        return yield* Effect.die(new Error(failure.value.error));
       }
 
       for (const change of result.changes) {

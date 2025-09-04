@@ -33,9 +33,7 @@ export class SetPlopGenerator extends Effect.Service<SetPlopGenerator>()(
         name: string,
         config: Partial<Lib.PlopGeneratorConfig>,
       ) {
-        yield* Effect.sync(() => plop.setGenerator(name, config));
-
-        return yield* Effect.sync(() => plop.getGenerator(name));
+        return yield* Effect.sync(() => plop.setGenerator(name, config));
       });
 
       return {

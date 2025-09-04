@@ -15,5 +15,7 @@ run(process.argv).pipe(
   Effect.provide(appLive),
   Effect.provide(NodeContext.layer),
   Logger.withMinimumLogLevel(LogLevel.Info),
-  NodeRuntime.runMain({ disableErrorReporting: true }),
+  NodeRuntime.runMain({
+    disableErrorReporting: false,
+  }),
 );

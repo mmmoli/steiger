@@ -18,23 +18,10 @@ export const command = Command.make(
       Options.withDescription("The name of the module to generate"),
       Options.withDefault("module-auth"),
     ),
-    aggregateName: Options.text("aggregate").pipe(
-      Options.withDescription("The name of the aggregate to generate"),
-      Options.withDefault("User"),
-    ),
-    useCaseName: Options.text("usecase").pipe(
-      Options.withDescription("The name of the Use Case to generate"),
-      Options.withDefault("Register User"),
-    ),
   },
-  ({ packageName, aggregateName, useCaseName }) =>
+  ({ packageName }) =>
     Effect.gen(function* () {
       const path = yield* Path.Path;
-
-      yield* Effect.logDebug({
-        import: import.meta.url,
-        meta: import.meta,
-      });
 
       const templatesDir = yield* Url.fromString(import.meta.url).pipe(
         Effect.map((url) => url.pathname),
@@ -52,6 +39,7 @@ export const command = Command.make(
       const templateFiles = path.join(base, "**/*");
 
       yield* Effect.logDebug({
+        meta: import.meta,
         destination,
         templatesDir,
         base,
@@ -84,22 +72,16 @@ export const command = Command.make(
           {
             type: "addMany",
             destination,
-            base: base,
-            templateFiles: templateFiles,
+            base,
+            templateFiles,
           },
         ],
-      });
-
-      yield* Effect.logDebug({
-        api,
       });
 
       const result = yield* Effect.tryPromise({
         try: () =>
           api.runActions({
             packageName,
-            aggregateName,
-            useCaseName,
           }),
         catch: (cause) => {
           console.error(cause);
@@ -107,15 +89,10 @@ export const command = Command.make(
         },
       });
 
-      yield* Effect.logDebug({
-        result,
-      });
-
       const failure = Option.fromNullable(result.failures?.[0]);
 
       if (Option.isSome(failure)) {
-        console.error(failure);
-        return Effect.die("nope");
+        return yield* Effect.die(new Error(failure.value.error));
       }
 
       for (const change of result.changes) {
