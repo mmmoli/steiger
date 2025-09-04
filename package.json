@@ -1,0 +1,23 @@
+{
+  "name": "steiger",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MOdule scaffolding tool for strict DDD + Effect.ts",
+  "main": "index.js",
+  "bin": {
+    "steiger": "./cli.js"
+  },
+  "scripts": {
+    "plop": "plop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.0",
+  "devDependencies": {
+    "plop": "^4.0.2"
+  },
+  "dependencies": {
+    "effect": "^3.17.13"
+  }
+}
