@@ -39,17 +39,6 @@ export const command = Command.make(
 
       const destination = process.cwd();
 
-      const base = path.join(templatesDir, "package");
-      const templateFiles = path.join(base, "**/*");
-
-      yield* Effect.logDebug({
-        meta: import.meta,
-        destination,
-        templatesDir,
-        base,
-        templateFiles,
-      });
-
       const makePlopApi = yield* Plop.SetPlopGenerator;
       const apiName = "package";
 
@@ -76,8 +65,17 @@ export const command = Command.make(
           {
             type: "addMany",
             destination,
-            base,
-            templateFiles,
+            base: path.join(templatesDir, "package"),
+            templateFiles: path.join(templatesDir, "package/**/*"),
+          },
+          {
+            type: "addMany",
+            destination: path.join(
+              destination,
+              "{{ kebabCase packageName }}/src",
+            ),
+            base: path.join(templatesDir, "aggregate"),
+            templateFiles: path.join(templatesDir, "aggregate/**/*"),
           },
         ],
       });

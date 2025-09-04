@@ -18,8 +18,16 @@ export const command = Command.make(
       Options.withDescription("The name of the module to generate"),
       Options.withDefault("module-auth"),
     ),
+    aggregateName: Options.text("aggregate").pipe(
+      Options.withDescription("The name of the aggregate to generate"),
+      Options.withDefault("User"),
+    ),
+    useCaseName: Options.text("usecase").pipe(
+      Options.withDescription("The name of the Use Case to generate"),
+      Options.withDefault("Register User"),
+    ),
   },
-  ({ packageName }) =>
+  ({ packageName, aggregateName, useCaseName }) =>
     Effect.gen(function* () {
       const path = yield* Path.Path;
 
@@ -82,6 +90,8 @@ export const command = Command.make(
         try: () =>
           api.runActions({
             packageName,
+            aggregateName,
+            useCaseName,
           }),
         catch: (cause) => {
           console.error(cause);
