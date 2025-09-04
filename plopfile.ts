@@ -2,7 +2,7 @@ import type * as API from "plop";
 
 export default function (plop: API.NodePlopAPI) {
   plop.setGenerator("module", {
-    description: "Generate a new DDD module",
+    description: "Generate a new DDD module + Effect",
     prompts: [
       {
         type: "input",
