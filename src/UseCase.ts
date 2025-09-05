@@ -13,7 +13,7 @@ export class PlopRunError extends Data.TaggedError("PlopRunError")<{
 }> {}
 
 export const command = Command.make(
-  "package",
+  "use-case",
   {
     packageName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
@@ -40,8 +40,23 @@ export const command = Command.make(
         Effect.map((d) => path.join(d, "../dist/templates")),
       );
 
+      yield* Effect.logDebug({
+        templatesDir,
+      });
+
+      const base = path.join(templatesDir, "use-case");
+      const templateFiles = path.join(base, "**/*");
+
+      yield* Effect.logDebug({
+        meta: import.meta,
+        destination: where,
+        templatesDir,
+        base,
+        templateFiles,
+      });
+
       const makePlopApi = yield* Plop.SetPlopGenerator;
-      const apiName = "package";
+      const apiName = "aggregate";
 
       const api = yield* makePlopApi.set(apiName, {
         description: "Generate a new DDD module + Effect",
@@ -65,25 +80,11 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination: where,
-            base: path.join(templatesDir, "package"),
-            templateFiles: path.join(templatesDir, "package/**/*"),
-            skipIfExists: false,
+            destination,
+            base,
+            templateFiles,
+            force: true,
           },
-          {
-            type: "addMany",
-            destination: path.join(where, "{{ kebabCase packageName }}/src"),
-            base: path.join(templatesDir, "aggregate"),
-            templateFiles: path.join(templatesDir, "aggregate/**/*"),
-            skipIfExists: false,
-          },
-          // {
-          //   type: "addMany",
-          //   destination: path.join(where, "{{ kebabCase packageName }}/src"),
-          //   base: path.join(templatesDir, "use-case"),
-          //   templateFiles: path.join(templatesDir, "use-case/**/*"),
-          //   skipIfExists: false,
-          // },
         ],
       });
 

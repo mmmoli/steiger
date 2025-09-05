@@ -41,18 +41,9 @@ export const command = Command.make(
       );
 
       yield* Effect.logDebug({
-        templatesDir,
-      });
-
-      const base = path.join(templatesDir, "aggregate");
-      const templateFiles = path.join(base, "**/*");
-
-      yield* Effect.logDebug({
         meta: import.meta,
         destination: where,
         templatesDir,
-        base,
-        templateFiles,
       });
 
       const makePlopApi = yield* Plop.SetPlopGenerator;
@@ -80,9 +71,18 @@ export const command = Command.make(
         actions: [
           {
             type: "addMany",
-            destination,
-            base,
-            templateFiles,
+            destination: where,
+            base: path.join(templatesDir, "aggregate"),
+            templateFiles: path.join(templatesDir, "aggregate/**/*"),
+            skipIfExists: false,
+          },
+          {
+            type: "addMany",
+            destination: where,
+            base: path.join(templatesDir, "use-case"),
+            templateFiles: path.join(templatesDir, "use-case/**/*"),
+            skipIfExists: false,
+            force: true,
           },
         ],
       });
