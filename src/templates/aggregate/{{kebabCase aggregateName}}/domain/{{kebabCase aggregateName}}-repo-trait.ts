@@ -32,9 +32,9 @@ export interface {{pascalCase aggregateName}}RepoTrait {
   getForId(
     id: Domain.{{pascalCase aggregateName}}Id,
   ): Effect.Effect<Option.Option<Domain.{{pascalCase aggregateName}}>, {{pascalCase aggregateName}}GetFailed>;
-  save({{ kebabCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain): Effect.Effect<void, {{pascalCase aggregateName}}SaveFailed>;
+  save({{ camelCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain): Effect.Effect<void, {{pascalCase aggregateName}}SaveFailed>;
   delete(
-    {{ kebabCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain,
+    {{ camelCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain,
   ): Effect.Effect<void, {{pascalCase aggregateName}}DeleteFailed>;
 }
 
