@@ -1,0 +1,25 @@
+{
+  "name": "@{{ kebabCase projectName }}/source",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.4",
+    "@{{ kebabCase projectName }}/typescript-config": "workspace:*",
+    "turbo": "^2.5.5",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@10.4.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "lefthook": "^1.12.2"
+  }
+}

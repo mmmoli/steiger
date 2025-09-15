@@ -1,0 +1,3 @@
+{
+  "extends": "@{{ kebabCase projectName }}/typescript-config/base.json"
+}

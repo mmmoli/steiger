@@ -1,0 +1,11 @@
+{
+  "extends": "@{{ kebabCase projectName }}/typescript-config/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@{{ kebabCase projectName }}/ui/*": ["./src/*"]
+    }
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}

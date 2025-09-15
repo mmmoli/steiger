@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@{{ kebabCase projectName }}/ui/components",
+    "utils": "@{{ kebabCase projectName }}/ui/lib/utils",
+    "hooks": "@{{ kebabCase projectName }}/ui/hooks",
+    "lib": "@{{ kebabCase projectName }}/ui/lib",
+    "ui": "@{{ kebabCase projectName }}/ui/components"
+  }
+}

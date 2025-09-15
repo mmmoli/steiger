@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Module",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  }
+}
