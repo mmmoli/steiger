@@ -1,0 +1,11 @@
+{
+  "extends": "@htch/typescript-config/module.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "composite": true,
+    "noEmit": false
+  },
+  "references": [{ "path": "../core-common" }, { "path": "../shared-events" }]
+}
