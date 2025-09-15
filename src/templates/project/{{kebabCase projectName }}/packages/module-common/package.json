@@ -1,5 +1,5 @@
 {
-  "name": "@{{ kebabCase projectName }}/shared-events",
+  "name": "@{{ kebabCase projectName }}/module-common",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,23 +9,19 @@
   "keywords": [],
   "author": "Michele Memoli <michele@htch.app>",
   "license": "MIT",
-  "dependencies": {
-    "@{{ kebabCase projectName }}/module-common": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@{{ kebabCase projectName }}/typescript-config": "workspace:*",
     "@effect/vitest": "^0.25.1",
-    "cloudflare": "^5.0.0",
     "effect": "^3.17.6",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "cloudflare": "^5.0.0",
     "effect": "^3.17.6"
   },
   "exports": {
-    "./domain": "./src/domain.ts",
-    "./infra": "./src/infra.ts",
-    "./layers": "./src/layers.ts"
+    "./domain": "./src/domain/index.ts",
+    "./application": "./src/application/index.ts"
   },
   "packageManager": "pnpm@10.14.0"
 }

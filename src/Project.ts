@@ -17,7 +17,7 @@ export const command = Command.make(
   {
     projectName: Options.text("module").pipe(
       Options.withDescription("The name of the module to generate"),
-      Options.withDefault("module-auth"),
+      Options.withDefault("my-new-project"),
     ),
   },
   ({ projectName }) =>

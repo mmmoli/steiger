@@ -1,3 +1,3 @@
-# `@htch/typescript-config`
+# `@{{ kebabCase projectName }}/typescript-config`
 
 Shared typescript configuration for the workspace.

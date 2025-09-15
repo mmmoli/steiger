@@ -2,11 +2,13 @@ import * as Command from "@effect/cli/Command";
 import * as Aggregate from "./Aggregate.js";
 import * as Generate from "./Generate.js";
 import * as Package from "./Package.js";
+import * as Project from "./Project.js";
 import * as UseCase from "./UseCase.js";
 
 export const run = Command.run(
   Generate.command.pipe(
     Command.withSubcommands([
+      Project.command,
       Package.command,
       Aggregate.command,
       UseCase.command,
