@@ -11,7 +11,7 @@ export class {{ pascalCase useCaseName }}UseCaseInput extends Schema.Class<{{ pa
     pipeline: Schema.Struct({
       id: Domain.{{ pascalCase aggregateName }}Id.pipe(
         Schema.annotations({
-          description: `The ID of the {{ kebabCase packageName }} you'd like to run e.g. "Picture 1"`,
+          description: `The ID of the {{ kebabCase aggregateName }} you'd like to run e.g. "Picture 1"`,
         }),
       ),
     }),
