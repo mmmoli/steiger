@@ -19,12 +19,6 @@
     "node": ">=20"
   },
   "dependencies": {
-    "lefthook": "^1.12.2",
-    "drizzle-orm": "^0.44.5"
-  },
-  "pnpm": {
-    "overrides": {
-      "drizzle-orm": "0.44.5"
-    }
+    "lefthook": "^1.12.2"
   }
 }

@@ -21,9 +21,7 @@
   },
   "exports": {
     "./domain": "./src/domain/index.ts",
-    "./application": "./src/application/index.ts",
-    "./infra": "./src/infra/index.ts",
-    "./infra/*": "./src/infra/*"
+    "./application": "./src/application/index.ts"
   },
   "packageManager": "pnpm@10.14.0"
 }
