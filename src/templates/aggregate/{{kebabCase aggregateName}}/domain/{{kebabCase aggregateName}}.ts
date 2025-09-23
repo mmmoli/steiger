@@ -4,16 +4,29 @@ export const {{pascalCase aggregateName}}Id = Schema.NonEmptyTrimmedString.pipe(
   Schema.brand("{{pascalCase aggregateName}}Id"),
   Schema.annotations({
     identifier: "{{pascalCase aggregateName}}Id",
+    description: `The unique identifies for this {{pascalCase aggregateName}} e.g. "abc1"`,
   })
 );
 
 export type {{pascalCase aggregateName}}Id = typeof {{pascalCase aggregateName}}Id.Type
+
+export const {{pascalCase aggregateName}}Name = Schema.NonEmptyTrimmedString.pipe(
+  Schema.brand("{{pascalCase aggregateName}}Name"),
+  Schema.annotations({
+    identifier: "{{pascalCase aggregateName}}Name",
+    description: `The name of this {{pascalCase aggregateName}} e.g. "Project 1"`,
+  })
+);
+
+export type {{pascalCase aggregateName}}Name = typeof {{pascalCase aggregateName}}Name.Type
+
 
 export class {{pascalCase aggregateName}} extends Schema.Class<{{pascalCase aggregateName}}>(
   "{{kebabCase packageName}}/{{kebabCase aggregateName}}/domain/{{pascalCase aggregateName}}",
 )(
   {
   id: {{pascalCase aggregateName}}Id,
+  name: {{pascalCase aggregateName}}Name,
   // add other fields
 }) {
   static decodeSingle = Schema.decodeUnknown({{pascalCase aggregateName}});
