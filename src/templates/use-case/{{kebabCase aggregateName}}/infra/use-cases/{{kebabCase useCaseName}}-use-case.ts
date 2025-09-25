@@ -16,7 +16,13 @@ export class {{ pascalCase useCaseName }}UseCase extends Effect.Service<{{ pasca
       const execute: App.{{ pascalCase useCaseName }}UseCaseImpl["execute"] = Effect.fn(
         "{{ pascalCase useCaseName }}UseCase.execute",
       )(function* (dto) {
-        const input = yield* App.{{ pascalCase useCaseName }}UseCaseInput.decode(dto);
+        const input = yield* Schema.decodeUnknown(App.{{ pascalCase useCaseName }}UseCaseInput)(
+          dto,
+        ).pipe(
+          Effect.mapError((cause) => new Common.InvalidInputError({ cause })),
+        );
+
+        const input = yield* App.{{ pascalCase useCaseName }}UseCaseInput.parse(dto);
 
         const now = new Date(yield* Clock.currentTimeMillis);
 

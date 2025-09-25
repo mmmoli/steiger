@@ -1,3 +1,4 @@
+import * as SqliteDrizzle from "@effect/sql-drizzle/Sqlite";
 import * as Drizzle from "drizzle-orm";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";
@@ -6,12 +7,10 @@ import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";
 import * as Domain from "../../domain";
 import * as schema from "./{{kebabCase aggregateName}}-schema";
-import * as Db from "./db-runtime-tag";
 
 export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
   Effect.gen(function* (_) {
-    const DbRuntime = yield* Db.{{pascalCase aggregateName}}DbRuntimeTag;
-    const db = yield* DbRuntime.use;
+    const db = yield* SqliteDrizzle.make({ schema });
 
     return Layer.succeed(
       Domain.{{pascalCase aggregateName}}Repo,
@@ -41,7 +40,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
           yield* Effect.logDebug("{{pascalCase aggregateName}} Deleted Op", op).pipe(
             Effect.annotateLogs(
               "tag",
-              "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+              "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
             ),
           );
 
@@ -52,7 +51,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
           }).pipe(
             Effect.annotateLogs(
               "tag",
-              "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+              "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
             ),
           );
         }),
@@ -90,7 +89,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
           yield* Effect.logDebug("{{pascalCase aggregateName}} Saved Op", op).pipe(
             Effect.annotateLogs(
               "tag",
-              "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+              "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
             ),
           );
 
@@ -101,7 +100,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
           }).pipe(
             Effect.annotateLogs(
               "tag",
-              "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+              "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
             ),
           );
         }),
@@ -115,7 +114,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
 
           const maybe{{pascalCase aggregateName}} = yield* Effect.tryPromise({
             try: () =>
-              db.query.{{kebabCase aggregateName}}s.findFirst({
+              db.query.{{kebabCase aggregateName}}.findFirst({
                 where: (table, { eq }) => eq(table.id, id),
               }),
 
@@ -128,7 +127,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
             }).pipe(
               Effect.annotateLogs(
                 "tag",
-                "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+                "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
               ),
             );
             return Option.none();
@@ -151,7 +150,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
           }).pipe(
             Effect.annotateLogs(
               "tag",
-              "core-workspaces/{{kebabCase aggregateName}}s/infra/{{pascalCase aggregateName}}Repo",
+              "{{kebabCase packageName}}/{{kebabCase aggregateName}}/infra/{{pascalCase aggregateName}}Repo",
             ),
           );
 

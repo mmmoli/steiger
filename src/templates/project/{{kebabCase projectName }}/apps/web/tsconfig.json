@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "../../packages/shared-events" },
+    { "path": "./tsconfig.cloudflare.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "checkJs": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "types": ["./worker-configuration.d.ts", "node"]
+  }
+}

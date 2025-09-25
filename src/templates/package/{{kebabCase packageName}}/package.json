@@ -14,11 +14,17 @@
     "@htch/core-common": "workspace:*"
   },
   "devDependencies": {
+    "@effect/sql": "^0.44.2",
+    "@effect/sql-drizzle": "^0.43.0",
     "@effect/vitest": "^0.25.1",
+    "drizzle-orm": "^0.44.5",
     "effect": "^3.17.6",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
+    "@effect/sql": "^0.44.2",
+    "@effect/sql-drizzle": "^0.43.0",
+    "drizzle-orm": "^0.44.5",
     "effect": "^3.17.6"
   },
   "exports": {

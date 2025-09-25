@@ -33,7 +33,7 @@ export interface {{ pascalCase useCaseName }}UseCaseImpl {
   execute: (
     params: typeof {{ pascalCase useCaseName }}UseCaseInput.Encoded,
   ) => Effect.Effect<
-    Domain.{{ pascalCase aggregateName }},
+    Domain.{{ pascalCase aggregateName }}.Encoded,
     | Common.InvalidInputError
     | Domain.{{ pascalCase aggregateName }}GetFailed
   >;

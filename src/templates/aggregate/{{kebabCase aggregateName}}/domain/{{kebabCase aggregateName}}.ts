@@ -27,7 +27,6 @@ export class {{pascalCase aggregateName}} extends Schema.Class<{{pascalCase aggr
   {
   id: {{pascalCase aggregateName}}Id,
   name: {{pascalCase aggregateName}}Name,
-  // add other fields
 }) {
   static decodeSingle = Schema.decodeUnknown({{pascalCase aggregateName}});
   static copy = (
