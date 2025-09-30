@@ -12,13 +12,20 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "includes": ["!**/worker-configuration.d.ts"]
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
-    }
+    },
+    "includes": [
+      "apps/**",
+      "packages/**",
+      "!**/build/**",
+      "!**/worker-configuration.d.ts"
+    ]
   },
   "javascript": {
     "formatter": {
