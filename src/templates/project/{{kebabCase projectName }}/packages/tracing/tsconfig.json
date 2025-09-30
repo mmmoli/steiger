@@ -1,9 +1,0 @@
-{
-  "extends": "@{{ kebabCase projectName }}/typescript-config/module.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "noEmit": false,
-    "composite": true
-  },
-  "references": []
-}
