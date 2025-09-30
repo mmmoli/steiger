@@ -1,48 +1,41 @@
 {
   "name": "web",
+  "description": "Main webapp",
   "private": true,
-  "description": "Build a full-stack web application with React Router 7.",
-  "type": "module",
-  "scripts": {
-    "build": "react-router build",
-    "cf-typegen": "wrangler types",
-    "check": "tsc && react-router build && wrangler deploy --dry-run",
-    "deploy": "pnpm run build && wrangler deploy",
-    "dev": "react-router dev",
-    "preview": "pnpm run build && vite preview",
-    "typecheck": "npm run typegen && tsc -b"
+  "peerDependencies": {
+    "effect": "^3.17.6"
   },
   "dependencies": {
+    "@effect/opentelemetry": "^0.58.0",
+    "@microlabs/otel-cf-workers": "1.0.0-rc.52",
+    "@react-router/fs-routes": "^7.9.3",
     "isbot": "5.1.26",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "7.6.3"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.7.5",
+    "@cloudflare/vite-plugin": "1.13.7",
     "@react-router/dev": "7.6.3",
     "@tailwindcss/vite": "4.1.4",
     "@types/node": "24.0.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "effect": "^3.17.6",
     "tailwindcss": "4.1.1",
     "typescript": "5.8.3",
     "vite": "^6.0.0",
     "vite-tsconfig-paths": "5.1.4",
-    "wrangler": "4.21.x"
+    "wrangler": "4.40.2"
   },
-  "cloudflare": {
-    "label": "React Router Framework Starter",
-    "products": [
-      "Workers"
-    ],
-    "categories": [
-      "storage"
-    ],
-    "icon_urls": [
-      "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/5ca0ca32-e897-4699-d4c1-6b680512f000/public"
-    ],
-    "preview_image_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/bfdc2f85-e5c9-4c92-128b-3a6711249800/public",
-    "publish": true
-  }
+  "scripts": {
+    "build": "react-router build",
+    "cf-typegen": "wrangler types && react-router typegen",
+    "check": "tsc && react-router build && wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
+    "dev": "react-router dev",
+    "preview": "npm run build && vite preview",
+    "typecheck": "npm run typegen && tsc -b"
+  },
+  "type": "module"
 }

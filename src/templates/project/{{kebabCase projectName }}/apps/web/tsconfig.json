@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
+    { "path": "../../packages/module-common" },
     { "path": "../../packages/shared-events" },
     { "path": "./tsconfig.cloudflare.json" },
     { "path": "./tsconfig.node.json" }
