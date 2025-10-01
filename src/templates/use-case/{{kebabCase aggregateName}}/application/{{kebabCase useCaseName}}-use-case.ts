@@ -1,4 +1,4 @@
-import * as Common from "@htch/core-common/domain";
+import * as Common from "@htch/module-common/domain";
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 import * as Dogs from "../../dogs/domain";

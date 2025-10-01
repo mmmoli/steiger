@@ -1,5 +1,5 @@
-import * as Common from "@htch/core-common/domain";
-import * as Infra from "@htch/core-common/infra";
+import * as Common from "@htch/module-common/domain";
+import * as Infra from "@htch/module-common/infra";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";
 import * as Domain from "../../domain";

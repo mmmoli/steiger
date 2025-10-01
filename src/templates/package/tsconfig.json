@@ -12,5 +12,5 @@
       "drizzle-orm/*": ["node_modules/drizzle-orm/*"]
     }
   },
-  "references": [{ "path": "../core-common" }, { "path": "../shared-events" }]
+  "references": [{ "path": "../module-common" }, { "path": "../shared-events" }]
 }

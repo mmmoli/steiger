@@ -11,7 +11,7 @@
   "author": "Michele Memoli <michele@htch.app>",
   "license": "MIT",
   "dependencies": {
-    "@htch/core-common": "workspace:*"
+    "@htch/module-common": "workspace:*"
   },
   "devDependencies": {
     "@effect/sql": "^0.44.2",
