@@ -114,7 +114,7 @@ export const {{pascalCase aggregateName}}RepoLive = Layer.unwrapEffect(
 
           const maybe{{pascalCase aggregateName}} = yield* Effect.tryPromise({
             try: () =>
-              db.query.{{kebabCase aggregateName}}.findFirst({
+              db.query.{{kebabCase aggregateName}}s.findFirst({
                 where: (table, { eq }) => eq(table.id, id),
               }),
 
