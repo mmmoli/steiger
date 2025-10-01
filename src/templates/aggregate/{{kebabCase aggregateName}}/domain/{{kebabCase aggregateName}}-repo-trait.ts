@@ -28,10 +28,16 @@ export class {{pascalCase aggregateName}}DeleteFailed extends Data.TaggedError(
   cause: unknown;
 }> {}
 
+export class {{pascalCase aggregateName}}EncodeError extends Data.TaggedError(
+  "{{kebabCase packageName}}/{{kebabCase aggregateName}}/domain/{{pascalCase aggregateName}}EncodeError",
+)<{
+  cause: unknown;
+}> {}
+
 export interface {{pascalCase aggregateName}}RepoTrait {
   getForId(
     id: Domain.{{pascalCase aggregateName}}Id,
-  ): Effect.Effect<Option.Option<Domain.{{pascalCase aggregateName}}>, {{pascalCase aggregateName}}GetFailed>;
+  ): Effect.Effect<Option.Option<Domain.{{pascalCase aggregateName}}>, {{pascalCase aggregateName}}GetFailed | {{pascalCase aggregateName}}EncodeError>;
   save({{ camelCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain): Effect.Effect<void, {{pascalCase aggregateName}}SaveFailed>;
   delete(
     {{ camelCase aggregateName }}: Domain.{{pascalCase aggregateName}}.Domain,

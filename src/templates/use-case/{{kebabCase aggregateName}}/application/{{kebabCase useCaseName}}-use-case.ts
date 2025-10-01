@@ -36,5 +36,6 @@ export interface {{ pascalCase useCaseName }}UseCaseImpl {
     Domain.{{ pascalCase aggregateName }}.Encoded,
     | Common.InvalidInputError
     | Domain.{{ pascalCase aggregateName }}GetFailed
+    | Domain.{{ pascalCase aggregateName }}EncodeError
   >;
 }
