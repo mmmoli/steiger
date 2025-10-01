@@ -6,6 +6,5 @@
     "outDir": "dist",
     "composite": true,
     "noEmit": false
-  },
-  "references": [{ "path": "../module-common" }]
+  }
 }
